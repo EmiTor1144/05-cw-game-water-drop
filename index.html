@@ -1,25 +1,54 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
+  <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Water Drop Game</title>
+    <title>Water Run Game </title>
+      
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-    <div class="game-wrapper">
-        <h1 class="game-title">Water Drop</h1>
-        <p class="game-tagline">Catch the good drops, avoid the bad ones!</p>
-        <div class="score-panel">
-            <div class="score">Score: <span id="score">0</span></div>
-            <div class="timer">Time: <span id="time">30</span>s</div>
-            <button id="start-btn">Start Game</button>
-        </div>
-        
-        <div id="game-container">
+   <div class="game-wrapper">
+       <h1 class="game-title">Water Run X</h1> 
+       <img src="img/cw_logo-horizontal.png" alt="Water Run Logo" class="game-logo">
+      <p class="game-tagline">Click and drag your character to catch the drops!</p>  
+    
+            <button id="start-btn">Start Mission</button>
+            <button id="menu-btn">Menu</button>  
+
+        <div class="game-container" id="game-container">
+         <div class="timer">Time: <span id="time">60</span></div> 
+         <score-panel><div class="score">Score: <span id="score">0</span></div> </score-panel>
+
+            <!-- Character and drops will be dynamically added here -->
+            <img id="character" src="img/Charity Water GIRL RUNNING.png" alt="Character" draggable="false">
+            <button id="pause-btn" title="Pause Game">
+                <svg width="36" height="36" viewBox="0 0 36 36" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <circle cx="18" cy="18" r="18" fill="#2E9DF7"/>
+                  <rect x="11" y="10" width="4" height="16" rx="2" fill="white"/>
+                  <rect x="21" y="10" width="4" height="16" rx="2" fill="white"/>
+                </svg>
+            </button>
+            <div id="pause-overlay" class="pause-overlay" style="display:none;">
+                <div class="pause-menu">
+                    <div class="pause-title">Game Paused</div>
+                    <div class="pause-btn-row">
+                        <button id="resume-btn" class="pause-action-btn">Resume</button>
+                        <button id="avatar-btn" class="pause-action-btn">Avatar</button>
+                    </div>
+                    <button id="menu-btn" class="pause-menu-btn">Menu</button>
+                    <button id="restart-btn" class="pause-menu-btn">Restart</button>
+                </div>
+            </div>
+            <div id="mission-complete-popup" class="mission-complete-popup" style="display:none;">
+                <div class="mission-complete-content">
+                  Mission Completed!<br>
+                  <button id="start-another-btn" class="mission-complete-btn">Start Another Mission</button>
+                </div>
+            </div>
         </div>
     </div>
-    
+
     <script src="script.js"></script>
 </body>
 </html>
