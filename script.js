@@ -336,21 +336,36 @@ function endGame() {
   // Show popup and blur/block game content
   const popup = document.getElementById('mission-complete-popup');
   const popupContent = popup ? popup.querySelector('.mission-complete-content') : null;
-  const restartMissionBtn = document.getElementById('restart-mission-btn');
   const startAnotherBtn = document.getElementById('start-another-btn');
   const gameContainer = document.getElementById('game-container');
   if (popup) popup.style.display = 'flex';
   if (gameContainer) gameContainer.classList.add('mission-complete');
-  if (popupContent) popupContent.textContent = popupConfig.message;
+
+  // Render message and restart button for Try Again
+  if (popupContent) {
+    popupContent.innerHTML = '';
+    const msg = document.createElement('div');
+    msg.textContent = popupConfig.message;
+    popupContent.appendChild(msg);
+    if (!popupConfig.showConfetti) {
+      // Add Restart Mission button under Try Again text
+      const restartBtn = document.createElement('button');
+      restartBtn.id = 'restart-mission-btn';
+      restartBtn.className = 'mission-complete-btn';
+      restartBtn.style.marginTop = '18px';
+      restartBtn.textContent = 'Restart Mission';
+      restartBtn.onclick = restartGame;
+      popupContent.appendChild(restartBtn);
+      if (startAnotherBtn) startAnotherBtn.style.display = 'none';
+    } else {
+      if (startAnotherBtn) startAnotherBtn.style.display = '';
+    }
+  }
   // Show confetti only for 20+
   if (popupConfig.showConfetti) {
     showConfetti();
-    if (restartMissionBtn) restartMissionBtn.style.display = 'none';
-    if (startAnotherBtn) startAnotherBtn.style.display = '';
   } else {
     clearConfetti();
-    if (restartMissionBtn) restartMissionBtn.style.display = '';
-    if (startAnotherBtn) startAnotherBtn.style.display = 'none';
   }
 }
 
