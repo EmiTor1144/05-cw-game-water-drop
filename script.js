@@ -299,6 +299,20 @@ function clearConfetti() {
   }
 }
 
+// End game popups config
+const endGamePopups = [
+  {
+    minScore: 20,
+    message: 'Mission Complete!',
+    showConfetti: true
+  },
+  {
+    minScore: 0,
+    message: 'Try Again',
+    showConfetti: false
+  }
+];
+
 function endGame() {
   gameRunning = false;
   clearInterval(dropMaker);
@@ -314,13 +328,41 @@ function endGame() {
   // Disable character drag
   character.removeEventListener("mousedown", onPointerDown);
   character.removeEventListener("touchstart", onPointerDown);
-  // Show mission completed popup and blur/block game content
+
+  // Determine which popup to show
+  let popupConfig = endGamePopups.find(p => score >= p.minScore && (p.minScore === 20 || score < 20));
+  if (!popupConfig) popupConfig = endGamePopups[1];
+
+  // Show popup and blur/block game content
   const popup = document.getElementById('mission-complete-popup');
+  const popupContent = popup ? popup.querySelector('.mission-complete-content') : null;
+  const restartMissionBtn = document.getElementById('restart-mission-btn');
+  const startAnotherBtn = document.getElementById('start-another-btn');
   const gameContainer = document.getElementById('game-container');
   if (popup) popup.style.display = 'flex';
   if (gameContainer) gameContainer.classList.add('mission-complete');
-  showConfetti();
+  if (popupContent) popupContent.textContent = popupConfig.message;
+  // Show confetti only for 20+
+  if (popupConfig.showConfetti) {
+    showConfetti();
+    if (restartMissionBtn) restartMissionBtn.style.display = 'none';
+    if (startAnotherBtn) startAnotherBtn.style.display = '';
+  } else {
+    clearConfetti();
+    if (restartMissionBtn) restartMissionBtn.style.display = '';
+    if (startAnotherBtn) startAnotherBtn.style.display = 'none';
+  }
 }
+
+// Add event listener for Restart Mission button
+window.addEventListener('DOMContentLoaded', () => {
+  const restartMissionBtn = document.getElementById('restart-mission-btn');
+  if (restartMissionBtn) {
+    restartMissionBtn.addEventListener('click', () => {
+      restartGame();
+    });
+  }
+});
 
 function startGame() {
   if (gameRunning) return;
