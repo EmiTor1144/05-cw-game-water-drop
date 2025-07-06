@@ -215,7 +215,7 @@ window.addEventListener("DOMContentLoaded", () => {
 });
 
 
-let timer = 60;
+let timer = 45;
 let timerInterval;
 
 function updateTimerDisplay() {
@@ -223,7 +223,7 @@ function updateTimerDisplay() {
 }
 
 function startTimer() {
-  timer = 10;
+  timer = 45;
   updateTimerDisplay();
   timerInterval = setInterval(() => {
     timer--;
