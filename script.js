@@ -60,6 +60,8 @@ document.addEventListener('DOMContentLoaded', () => {
   const resumeBtn = document.getElementById('resume-btn');
   const restartBtn = document.getElementById('restart-btn');
   const startAnotherBtn = document.getElementById('start-another-btn');
+  const gameOverlay = document.getElementById('game-overlay');
+  const startBtn = document.getElementById('start-btn');
   if (pauseBtn) {
     pauseBtn.addEventListener('click', () => {
       if (!isPaused) {
@@ -90,6 +92,12 @@ document.addEventListener('DOMContentLoaded', () => {
   if (startAnotherBtn) {
     startAnotherBtn.addEventListener('click', () => {
       restartGame();
+    });
+  }
+  if (gameOverlay && startBtn) {
+    startBtn.addEventListener('click', () => {
+      gameOverlay.style.display = 'none';
+      // Optionally, start the game logic here
     });
   }
   // Avatar button and menu already handled elsewhere
@@ -437,6 +445,29 @@ function createDrop() {
   const sizeMultiplier = Math.random() * 0.8 + 0.5;
   const size = initialSize * sizeMultiplier;
   drop.style.width = drop.style.height = `${size}px`;
+
+  // Use image for clean/dirty drop
+  if (isClean) {
+    drop.style.background = 'none';
+    const img = document.createElement('img');
+    img.src = 'img/CLEAN water drop.png';
+    img.alt = 'Clean Water Drop';
+    img.style.width = '100%';
+    img.style.height = '100%';
+    img.style.objectFit = 'contain';
+    img.draggable = false;
+    drop.appendChild(img);
+  } else {
+    drop.style.background = 'none';
+    const img = document.createElement('img');
+    img.src = 'img/DIRTY water drop.png';
+    img.alt = 'Dirty Water Drop';
+    img.style.width = '100%';
+    img.style.height = '100%';
+    img.style.objectFit = 'contain';
+    img.draggable = false;
+    drop.appendChild(img);
+  }
 
   // Position the drop randomly across the game width, keeping it inside the container
   const gameContainer = document.getElementById("game-container");

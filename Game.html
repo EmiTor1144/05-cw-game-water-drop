@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Water Run Game </title>
+      
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+   <div class="game-wrapper">
+       <h1 class="game-title">Water Run </h1> 
+       <h2 class="game-subtitle"> X</h2>
+       <img src="img/cw_logo-horizontal.png" alt="Water Run Logo" class="game-logo">
+  
+        <div class="game-container" id="game-container">
+          <div id="game-overlay" class="game-overlay" style="display: flex;">
+            <div class="game-overlay-content">
+              <h2>Welcome to Water Run!</h2>
+              <p class="game-tagline">Click and drag your character to catch the drops!</p>  
+              <button id="start-btn" class="menu-btn">Start Mission</button>
+            </div>
+          </div>
+         <div class="timer">Time: <span id="time">45</span></div> 
+         <score-panel><div class="score">Score: <span id="score">0</span></div> </score-panel>
+
+            <!-- Character and drops will be dynamically added here -->
+            <img id="character" src="img/Charity Water GIRL RUNNING.png" alt="Character" draggable="false">
+            <button id="pause-btn" title="Pause Game">
+                <svg width="36" height="36" viewBox="0 0 36 36" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <circle cx="18" cy="18" r="18" fill="#2E9DF7"/>
+                  <rect x="11" y="10" width="4" height="16" rx="2" fill="white"/>
+                  <rect x="21" y="10" width="4" height="16" rx="2" fill="white"/>
+                </svg>
+            </button>
+            <div id="pause-overlay" class="pause-overlay" style="display:none;">
+                <div class="pause-menu">
+                    <div class="pause-title">Game Paused</div>
+                    <div class="pause-btn-row">
+                        <button id="resume-btn" class="pause-action-btn">Resume</button>
+                        <button id="restart-btn" class="pause-action-btn">Restart</button>
+                    </div>
+
+                    <button onclick="window.location.href='index.html'" id="menu-btn" class="pause-menu-btn">Menu</button>
+                    <button id="settings-btn" class="pause-menu-btn">Settings</button>
+                    
+                </div>
+            </div>
+            <div id="mission-complete-popup" class="mission-complete-popup" style="display:none;">
+              <div class="mission-complete-content">
+                Mission Completed!<br>
+                <button id="restart-mission-btn" class="mission-complete-btn" style="display:none; margin-top: 18px;">Restart Mission</button>
+              </div>
+              <button id="start-another-btn" class="mission-complete-btn">Start Another Mission</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
