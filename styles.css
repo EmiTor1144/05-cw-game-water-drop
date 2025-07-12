@@ -1,4 +1,5 @@
 
+
 /* Charity: water Brand Colors & Fonts
 
 Primary Colors:
@@ -25,7 +26,7 @@ body {
     align-items: center;
     min-height: 100vh;
     background-color: #f0f0f0;
-    font-family: Proxima Nova, Avenir, sans-serif;
+    font-family: 'Proxima Nova', 'Avenir', sans-serif;
     overflow-x: hidden;
 }
 
@@ -421,29 +422,71 @@ body {
   text-align: center;
 }
 
-.menu {
-    font-size: 60px;
-    color: #2E9DF7;
-    margin-bottom: 20px;
+
+
+.menu-wrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    height: 100%;
+    margin: 0px;
+    padding: 0px;
+    background-color: #f0f0f0;
 }
 
-.h4 {
-    color: #b1acc4;
-    font-size: 36px;
-    margin-bottom: 10px;
+#menu-container {
+  width: 800px;
+    height: 600px;
+    background-color: #e6f7ff;
+    border: 4px solid #333;
+    border-radius: 8px;
+    position: relative;
+    overflow: hidden;
+    margin-bottom: 50px;
 }
+
+h1 {
+  text-decoration: solid;
+    color: #131313;
+    font-size: 48px;
+    margin: 0;
+    padding: 0;
+    text-align: center;
+}
+.game-subtitle {
+    color: #000000;
+    font-size: 24px;
+    margin: 0px;
+}
+menu {
+    font-size: 60px;
+    color: #2E9DF7;
+    margin-top: 5px;
+    margin-bottom: 0px;
+    padding: 0px;
+    text-shadow: #040c17d1 0px 2px 4px;
+    text-align: center;
+}
+h4 {
+  text-align: center;
+    color: #FFC907;
+    text-shadow: #41260392 0px 2px 4px;
+    font-size: 30px;
+    margin-bottom: 10px;
+    margin-top: 0px;
+}
+
+  
 #story-slideshow {
-    display: flex;
-    flex-direction: row;
-    align-items: flex-start;
-    justify-content: flex-end;
-    gap: 18px;
-    width: 500px;
-    margin: 0 0 0 auto;
-    position: absolute;
-    right: 0;
-    top: 0;
-    z-index: 0;
+  display: flex;
+  flex-direction: row;
+  gap: 18px;
+  justify-content: center;
+  align-items: flex-start;
+  width: 100%;
+  margin: 20px 0;
 }
 
 .slideshow-card {
@@ -451,32 +494,99 @@ body {
     flex-direction: column;
     align-items: center;
     justify-content: flex-start;
-    width: 140px;
-    min-width: 120px;
-    height: 180px;
+    width: 180px;
+    height: 210px;
     border: 2px solid #2E9DF7;
     background-color: #ffffff;
     border-radius: 12px;
-    box-shadow: 0 2px 8px rgba(46,157,247,0.08);
+    box-shadow: 0 2px 8px rgba(46, 157, 247, 0.507);
     padding: 10px 8px;
     margin: 0;
 }
+   
 .slideshow-img {
-    width: 100px;
-    height: 90px;
+    width: 90px;
+    height: 80px;
     border-radius: 8px;
     box-shadow: 0 2px 6px rgba(0, 0, 0, 0.18);
     margin-bottom: 0px;
 }
 .slideshow-title {
     font-weight: bold;
-    font-size: 1.05em;
+    font-size: 15px;
     color: #2E9DF7;
     margin-bottom: 4px;
     text-align: center;
 }
 .slideshow-summary {
-    font-size: 0.95em;
+    font-size: 12px;
     color: #333;
     text-align: center;
+}
+.slideshow-link {
+    font-size: 13px;
+    font-weight: bold;
+    color: #FFC907;
+    text-decoration: underline;
+    margin-top: 8px;
+    text-align: center;
+    cursor: pointer;
+    transition: color 0.2s, text-decoration 0.2s;
+}
+
+.slideshow-link:hover {
+    color: #2E9DF7;
+    text-decoration: underline wavy;
+}
+h5 {
+    color: #2E9DF7;
+    font-size: 40px;
+    margin-top: 30px;
+    margin-bottom: 10px;
+    text-align: center;
+}
+
+.Charity-buttons, .menu-buttons {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 12px;
+  margin: 18px 0;
+}
+
+.charity-btn {
+    padding: 8px 16px;
+    background-color:#FFC907;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 16px;
+    margin: 0px;
+    box-shadow: 0px 3px 8px rgba(0, 0, 0, 0.582);
+}
+.charity-btn:hover {
+    background-color: #2E9DF7;
+    color: #131313;
+}
+.menu-btn {
+    display: flex;
+    justify-content: center;
+    flex-direction: row;
+    gap: 10px;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    padding: 8px 16px;
+    background-color:#2E9DF7;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 16px;
+    margin: 0px;
+    box-shadow: 0px 3px 8px rgba(0, 0, 0, 0.582);
+}
+.menu-btn:hover {
+    background-color: #FFC907;
+    color: #131313;
 }
