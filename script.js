@@ -132,6 +132,7 @@ function checkDropCollision(drop) {
     // Score logic:
     if (drop.classList.contains('clean-drop')) {
       score++;
+      playChime();
     } else if (drop.classList.contains('dirty-drop')) {
       if (score > 0) score--;
     }
@@ -500,4 +501,12 @@ function createDrop() {
       drop._collisionCheck = null;
     }
   });
+}
+
+function playChime() {
+  const chime = document.getElementById('chime-sound');
+  if (chime) {
+    chime.currentTime = 0;
+    chime.play().catch(err => console.error('Error playing chime:', err));
+  }
 }
