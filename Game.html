@@ -6,6 +6,11 @@
     <title>Water Run Game </title>
       
     <link rel="stylesheet" href="styles.css">
+    <style>
+      body, h1, h2, h3, h4, h5, h6, p, a, button, div, span, menu {
+        font-family: 'Proxima Nova', 'Avenir', sans-serif;
+      }
+    </style>
 </head>
 <body>
    <div class="game-wrapper">
@@ -26,13 +31,26 @@
 
             <!-- Character and drops will be dynamically added here -->
             <img id="character" src="img/Charity Water GIRL RUNNING.png" alt="Character" draggable="false">
-            <button id="pause-btn" title="Pause Game">
+            <button id="pause-btn" title="Pause Game" style="position:absolute; right:18px; bottom:18px;">
                 <svg width="36" height="36" viewBox="0 0 36 36" fill="none" xmlns="http://www.w3.org/2000/svg">
                   <circle cx="18" cy="18" r="18" fill="#2E9DF7"/>
                   <rect x="11" y="10" width="4" height="16" rx="2" fill="white"/>
                   <rect x="21" y="10" width="4" height="16" rx="2" fill="white"/>
                 </svg>
             </button>
+            <button id="music-btn" title="Music" style="position:absolute; right:66px; bottom:18px; background:none; border:none; padding:0; cursor:pointer; width:48px; height:48px; z-index:10;">
+                <span style="position:relative; display:inline-block; width:48px; height:48px;">
+                  <svg width="48" height="48" style="position:absolute; top:0; left:0; z-index:0;">
+                    <circle cx="24" cy="24" r="24" fill="#2E9DF7"/>
+                  </svg>
+                  <img id="music-icon-img" src="img/R.png" alt="Music Note" style="width:32px; height:32px; position:absolute; top:8px; left:8px; z-index:1;" />
+                  <svg id="music-mute-svg" width="48" height="48" style="position:absolute; top:0; left:0; pointer-events:none; z-index:2; display:none;">
+                    <line x1="12" y1="40" x2="36" y2="12" stroke="#F5402C" stroke-width="5" stroke-linecap="round" />
+                  </svg>
+                </span>
+            </button>
+            <audio id="game-music" src="music/videoplayback.m4a" loop></audio>
+            <audio id="chime-sound" src="music/chime.mp3" preload="auto"></audio>
             <div id="pause-overlay" class="pause-overlay" style="display:none;">
                 <div class="pause-menu">
                     <div class="pause-title">Game Paused</div>
@@ -57,5 +75,31 @@
     </div>
 
     <script src="script.js"></script>
+    <script>
+    const musicBtn = document.getElementById('music-btn');
+    const musicMuteSvg = document.getElementById('music-mute-svg');
+    const gameMusic = document.getElementById('game-music');
+    const chimeSound = document.getElementById('chime-sound');
+    let musicMuted = false;
+
+    // Start music when game starts
+    document.getElementById('start-btn').addEventListener('click', function() {
+      gameMusic.volume = 0.5;
+      gameMusic.play();
+    });
+
+    musicBtn.addEventListener('click', function() {
+      musicMuted = !musicMuted;
+      gameMusic.muted = musicMuted;
+      musicMuteSvg.style.display = musicMuted ? 'inline' : 'none';
+    });
+
+    // Call this function when a clean water drop is collected
+    function playChime() {
+      chimeSound.currentTime = 0;
+      chimeSound.play();
+    }
+    // Example usage: playChime();
+    </script>
 </body>
 </html>

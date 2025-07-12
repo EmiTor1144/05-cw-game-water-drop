@@ -7,6 +7,11 @@
     <title>Water Run Game </title>
       
     <link rel="stylesheet" href="styles.css">
+    <style>
+      body, h1, h2, h3, h4, h5, h6, p, a, button, div, span, menu {
+        font-family: 'Proxima Nova', 'Avenir', sans-serif;
+      }
+    </style>
 </head>
 <body>
   <div class="menu-wrapper">
@@ -14,43 +19,47 @@
   <h2 class="game-subtitle"> X</h2>
   <img src="img/cw_logo-horizontal.png" alt="Water Run Logo" class="game-logo">
 
-  <div class="game-container" id="game-container">
+  <div class="game-container" id="menu-container">
     <menu> Main Menu</menu>
     <h4> Chairty: Water </h4>
-    <h5> Game Menu </h5>
-
     
-    <div id="story-slideshow">
+    
+    <div class="slideshow" id="story-slideshow">
             
       <div class="slideshow-card" card-wrapper>
           <img src="img/Screenshot_11-7-2025_21207_www.charitywater.org.jpeg" alt="Waiting for Clean Water" class="slideshow-img">
           <div class="slideshow-title">Waiting for Clean Water</div>
           <div class="slideshow-summary">A story about communities waiting for access to clean water and the impact it has on their daily lives.</div>
+          <a href="https://www.charitywater.org/stories/waiting-for-clean-water" target="_blank" class="slideshow-link">Read more.</a>
       </div>
 
         <div class="slideshow-card">
           <img src="img/Screenshot 2025-07-12 022349.png" alt="What Helen Taught Us" class="slideshow-img">
           <div class="slideshow-title">What Helen Taught Us</div>
           <div class="slideshow-summary">Helen’s journey to clean water inspires hope and demonstrates the power of community-driven change.</div>
+          <a href="https://www.charitywater.org/stories/what-helen-taught-us" target="_blank" class="slideshow-link">Read more.</a>
         </div>
 
         <div class="slideshow-card">
           <img src="img/Screenshot 2025-07-12 022405.png" alt="Between Heaven and Earth" class="slideshow-img">
           <div class="slideshow-title">Between Heaven and Earth</div>
           <div class="slideshow-summary">Discover how access to clean water transforms lives in remote villages between mountains and valleys.</div>
+          <a href="https://www.charitywater.org/stories/between-heaven-and-earth" target="_blank" class="slideshow-link">Read more.</a>
         </div>
 
       </div>
 
 
     <div class="Charity-buttons">
-      <button onclick="window.location.href='https://www.charitywater.org/how-we-work'">How they work!</button>
-      <button onclick="window.location.href='https://charitywater.org/'">Donate!</button> 
+      <button class="charity-btn" onclick="window.location.href='https://www.charitywater.org/how-we-work'">How they work!</button>
+      <button class="charity-btn" onclick="window.location.href='https://charitywater.org/'">Donate!</button>
     </div>
+
+     <h5> Game Menu </h5>
 <div class="menu-buttons">
-  <button onclick="window.location.href='character.html'">Your Character!</button>
-    <button onclick="window.location.href='Game.html'">Play Game</button>
-  </div>
+  <button class="menu-btn" onclick="window.location.href='character.html'">Your Character</button>
+  <button class="menu-btn" onclick="window.location.href='Game.html'">Play Game</button>
+</div>
 
 
   <script src="script.js"></script>
