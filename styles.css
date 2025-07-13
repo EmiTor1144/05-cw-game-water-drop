@@ -1,3 +1,146 @@
+@media (max-width: 600px) {
+   body {
+    margin-top: 0;
+    margin-bottom: 0;
+  }
+ .game-title {
+    font-size: 300px;
+    margin-bottom: 0;
+    }
+ .game-subtitle {
+    font-size: 24px;
+    margin: 0
+    }
+
+  .game-logo {
+    width: 50%;
+    height: 50%;
+    margin: 0 auto;
+  }
+
+
+  #game-container, #menu-container {
+    width: 400px;
+    height: 300px;
+    border-width: 2.5px;
+    margin-bottom: 10px;
+  }
+  #character {
+    width: 70px;
+    height: 130px;
+    transform: translateX(-50%);
+    bottom: 4px;
+  }
+  .water-drop {
+    width: 36px;
+    height: 36px;
+    min-width: 18px;
+    min-height: 18px;
+    max-width: 36px;
+    max-height: 36px;
+    padding: 4px;
+    margin: -4px;
+  }
+  .game-title {
+    font-size: 1.2em;
+  }
+  .game-tagline {
+    font-size: 0.9em;
+  }
+  .score-panel {
+    gap: 6px;
+    margin-bottom: 6px;
+  }
+  .score, .timer {
+    font-size: 0.9em;
+    width: 54px;
+    padding: 2px 4px;
+    border-width: 2px;
+  }
+  #pause-btn, #music-btn {
+    width: 28px;
+    height: 28px;
+    right: 6px;
+    bottom: 6px;
+  }
+  #music-btn {
+    right: 30px;
+  }
+  .pause-menu, .mission-complete-content {
+    min-width: 120px;
+    padding: 8px 2vw 8px 2vw;
+    font-size: 0.9em;
+  }
+  .pause-title {
+    font-size: 1em;
+  }
+  .pause-action-btn, .pause-menu-btn, .mission-complete-btn {
+    font-size: 0.9em;
+    padding: 6px 8px;
+    border-radius: 4px;
+  }
+  #milestone-container {
+    width: 98px;
+    height: auto;
+    min-height: 400px;
+    margin-bottom: 18px;
+    padding: 0 2vw;
+  }
+  .milestone-sections {
+    width: 100%;
+    padding: 0;
+  }
+  #achievements {
+    flex-direction: column;
+    gap: 12px;
+    align-items: center;
+    margin: 12px 0 0 0;
+    width: 100%;
+  }
+  .achievement-card {
+    width: 90vw;
+    max-width: 340px;
+    height: auto;
+    min-height: 140px;
+    margin: 10px 0;
+    padding: 8px 4vw;
+  }
+  .milestone-img {
+    width: 60px;
+    height: 40px;
+  }
+  .achievement-title {
+    font-size: 1.1em;
+  }
+  .achievement-summary {
+    font-size: 1em;
+  }
+  .achievement-status, .status-text {
+    font-size: 1em;
+  }
+  .menu-buttons {
+    flex-direction: column;
+    gap: 10px;
+    margin-top: 18px;
+    width: 100%;
+    align-items: center;
+  }
+  .menu-btn {
+    font-size: 1em;
+    padding: 8px 0;
+    width: 90vw;
+    max-width: 340px;
+    margin: 0 auto;
+  }
+  .game-title {
+    font-size: 2em;
+  }
+  .game-logo {
+    width: 60vw;
+    height: auto;
+    margin: 0 auto 10px auto;
+  }
+}
 
 
 /* Charity: water Brand Colors & Fonts
@@ -109,7 +252,7 @@ body {
     fill: #FFC907;
 }
 
-#game-container {
+#game-container, #menu-container, #milestone-container {
     width: 800px;
     height: 600px;
     background-color: #e6f7ff;
@@ -118,6 +261,7 @@ body {
     position: relative;
     overflow: hidden;
     margin-bottom: 50px;
+  
 }
 
 #character {
@@ -165,92 +309,6 @@ body {
 }
 
 
-
-@media (max-width: 600px) {
-
-    
-  body {
-    margin-top: 0;
-    margin-bottom: 0;
-  }
-
- .game-title {
-    font-size: 300px;
-    margin-bottom: 0;
-    }
- .game-subtitle {
-    font-size: 24px;
-    margin: 0
-    }
-
-  .game-logo {
-    width: 50%;
-    height: 50%;
-    margin: 0 auto;
-  }
-
-
-  #game-container {
-    width: 400px;
-    height: 300px;
-    border-width: 2.5px;
-    margin-bottom: 10px;
-  }
-  #character {
-    width: 70px;
-    height: 130px;
-    transform: translateX(-50%);
-    bottom: 4px;
-  }
-  .water-drop {
-    width: 36px;
-    height: 36px;
-    min-width: 18px;
-    min-height: 18px;
-    max-width: 36px;
-    max-height: 36px;
-    padding: 4px;
-    margin: -4px;
-  }
-  .game-title {
-    font-size: 1.2em;
-  }
-  .game-tagline {
-    font-size: 0.9em;
-  }
-  .score-panel {
-    gap: 6px;
-    margin-bottom: 6px;
-  }
-  .score, .timer {
-    font-size: 0.9em;
-    width: 54px;
-    padding: 2px 4px;
-    border-width: 2px;
-  }
-  #pause-btn, #music-btn {
-    width: 28px;
-    height: 28px;
-    right: 6px;
-    bottom: 6px;
-  }
-  #music-btn {
-    right: 36px;
-  }
-  .pause-menu, .mission-complete-content {
-    min-width: 120px;
-    padding: 8px 2vw 8px 2vw;
-    font-size: 0.9em;
-  }
-  .pause-title {
-    font-size: 1em;
-  }
-  .pause-action-btn, .pause-menu-btn, .mission-complete-btn {
-    font-size: 0.9em;
-    padding: 6px 8px;
-    border-radius: 4px;
-  }
-}
 
 .pause-overlay {
     position: absolute;
@@ -332,7 +390,7 @@ body {
     filter: blur(2px) grayscale(0.2);
     user-select: none;
 }
-.mission-complete-popup {
+#mission-complete-popup {
     position: absolute;
     top: 0; left: 0; right: 0; bottom: 0;
     width: 100%;
@@ -344,21 +402,23 @@ body {
     pointer-events: all;
     background: rgba(44, 62, 80, 0.75);
 }
-.mission-complete-content {
+.mission-complete-content, .try-again-message {
     background: #fff;
     border: 4px solid #FFC907;
     color: #2E9DF7;
     font-size: 2.5em;
     font-weight: bold;
     border-radius: 18px;
-    padding: 40px 60px;
+    padding: 40px 60px 32px 60px; /* Add extra bottom padding for button */
     box-shadow: 0 8px 32px rgba(0,0,0,0.18);
     text-align: center;
     letter-spacing: 1px;
     pointer-events: all;
 }
 .mission-complete-btn {
-    margin-top: 32px;
+    align-items: center;
+    margin-top: 24px;
+    margin-bottom: 0;
     background: #2E9DF7;
     color: #fff;
     border: none;
@@ -436,16 +496,8 @@ body {
     background-color: #f0f0f0;
 }
 
-#menu-container {
-  width: 800px;
-    height: 600px;
-    background-color: #e6f7ff;
-    border: 4px solid #333;
-    border-radius: 8px;
-    position: relative;
-    overflow: hidden;
-    margin-bottom: 50px;
-}
+
+
 
 h1 {
   text-decoration: solid;
@@ -479,7 +531,7 @@ h4 {
 }
 
   
-#story-slideshow {
+#story-slideshow, #achievements {
   display: flex;
   flex-direction: row;
   gap: 18px;
@@ -502,6 +554,21 @@ h4 {
     box-shadow: 0 2px 8px rgba(46, 157, 247, 0.507);
     padding: 10px 8px;
     margin: 0;
+}
+ .achievement-card {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+    width: 180px;
+    height: 210px;
+    border: 2px solid #2E9DF7;
+    background-color: #ffffff;
+    border-radius: 12px;
+    box-shadow: 0 2px 8px rgba(46, 157, 247, 0.507);
+    padding: 10px 8px;
+    margin-top: 20px;
+    margin-bottom: 20px;
 }
    
 .slideshow-img {
@@ -591,13 +658,44 @@ h5 {
     color: #131313;
 }
 
-#milestone-container {
-     width: 800px;
-    height: 600px;
-    background-color: #e6f7ff;
-    border: 4px solid #333;
+
+
+
+.milestone-img {
+    width: 40px;
+    height: 60px;
     border-radius: 8px;
-    position: relative;
-    overflow: hidden;
-    margin-bottom: 50px;
+   
+    margin-bottom: 0px;
 }
+
+.achievement-title {
+    font-weight: bold;
+    font-size: 20px;
+    color:#2E9DF7;
+    margin: 0px;
+    text-align: center;
+}
+.achievement-summary {
+    font-size: 20px;
+    color: #333;
+    text-align: center;
+    margin: 0px;
+}
+.achievement-card.unlocked {
+    background: #c8e6c9;
+    border-color: #388e3c;
+    box-shadow: 0 2px 12px rgba(56, 142, 60, 0.25);
+}
+.achievement-status,.status-text {
+    font-size: 20px;
+    color: #2E9DF7;
+    margin-top: 5px;
+}
+  
+    .achievement.unlocked {
+      display: block;
+      background: #c8e6c9;
+      border-left-color: #388e3c;
+      font-weight: bold;
+    }
