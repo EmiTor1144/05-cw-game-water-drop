@@ -18,7 +18,7 @@
        <h2 class="game-subtitle"> X</h2>
        <img src="img/cw_logo-horizontal.png" alt="Water Run Logo" class="game-logo">
   
-        <div class="game-container" id="game-container">
+        <div class="game-container" id="game-container" style="background: url('img/Screenshot_11-7-2025_21207_www.charitywater.org.jpeg') center center / cover no-repeat;">
           <div id="game-overlay" class="game-overlay" style="display: flex;">
             <div class="game-overlay-content">
               <h2>Welcome to Water Run!</h2>
@@ -26,7 +26,7 @@
               <button id="start-btn" class="menu-btn">Start Mission</button>
             </div>
           </div>
-         <div class="timer">Time: <span id="time">45</span></div> 
+         <div class="timer">Time: <span id="time">00</span></div> 
          <score-panel><div class="score">Score: <span id="score">0</span></div> </score-panel>
 
             <!-- Character and drops will be dynamically added here -->
@@ -65,42 +65,19 @@
               </div>
             </div>
 
-            <div id="mission-complete-popup" class="mission-complete-popup" style="display:none;">
-              <div class="mission-complete-content">
-                Mission Completed!<br>
-                <button id="restart-mission-btn" class="mission-complete-btn" style="display:none; margin-top: 18px;">Restart Mission</button>
+            <div id="mission-complete-popup" style="display:none; position:fixed; top:0; left:0; width:100vw; height:100vh; background:rgba(0,0,0,0.5); z-index:1000; align-items:center; justify-content:center;">
+              <div class="mission-complete-content" style="background:#fff; border-radius:16px; padding:32px 24px; box-shadow:0 4px 24px rgba(0,0,0,0.18); min-width:280px; text-align:center;">
+                Mission Completed!
               </div>
               <button id="start-another-btn" class="mission-complete-btn">Start Another Mission</button>
             </div>
+            
+            
+            
         </div>
     </div>
 
     <script src="script.js"></script>
-    <script>
-    const musicBtn = document.getElementById('music-btn');
-    const musicMuteSvg = document.getElementById('music-mute-svg');
-    const gameMusic = document.getElementById('game-music');
-    const chimeSound = document.getElementById('chime-sound');
-    let musicMuted = false;
-
-    // Start music when game starts
-    document.getElementById('start-btn').addEventListener('click', function() {
-      gameMusic.volume = 0.5;
-      gameMusic.play();
-    });
-
-    musicBtn.addEventListener('click', function() {
-      musicMuted = !musicMuted;
-      gameMusic.muted = musicMuted;
-      musicMuteSvg.style.display = musicMuted ? 'inline' : 'none';
-    });
-
-    // Call this function when a clean water drop is collected
-    function playChime() {
-      chimeSound.currentTime = 0;
-      chimeSound.play();
-    }
-    // Example usage: playChime();
-    </script>
+    
 </body>
 </html>

@@ -62,6 +62,73 @@ document.addEventListener('DOMContentLoaded', () => {
   const startAnotherBtn = document.getElementById('start-another-btn');
   const gameOverlay = document.getElementById('game-overlay');
   const startBtn = document.getElementById('start-btn');
+  const settingsBtn = document.getElementById('settings-btn');
+  window.gameMode = 'normal'; // default, make global
+
+  // Settings popup logic
+  function showSettingsPopup() {
+    let popup = document.getElementById('settings-popup');
+    if (!popup) {
+      popup = document.createElement('div');
+      popup.id = 'settings-popup';
+      popup.style.position = 'fixed';
+      popup.style.top = '0';
+      popup.style.left = '0';
+      popup.style.width = '100vw';
+      popup.style.height = '100vh';
+      popup.style.background = 'rgba(0,0,0,0.5)';
+      popup.style.display = 'flex';
+      popup.style.alignItems = 'center';
+      popup.style.justifyContent = 'center';
+      popup.style.zIndex = '999';
+      // Use pause-menu style for inner box
+      popup.innerHTML = `
+        <div class="pause-menu" style="background: #fff; border-radius: 16px; padding: 32px 24px; box-shadow: 0 4px 24px rgba(0,0,0,0.18); min-width: 280px; text-align: center;">
+          <div class="pause-title" style="margin-bottom: 18px; font-size: 1.3em;">Select Game Mode</div>
+          <div style="margin-bottom: 12px; color: #F5402C; font-size: 1em; font-weight: 500;">
+            Restart your game after changing game mode!
+          </div>
+          <div class="pause-btn-row" style="display: flex; flex-direction: column; gap: 10px;">
+            <button id="easy-mode-btn" style="margin: 0; width: 100%; padding: 12px; font-size: 1em; border-radius: 8px; border: none; background: #8BD1CB; color: #222; cursor: pointer;">Easy</button>
+            <button id="normal-mode-btn" style="margin: 0; width: 100%; padding: 12px; font-size: 1em; border-radius: 8px; border: none; background: #2E9DF7; color: #fff; cursor: pointer;">Normal</button>
+            <button id="hard-mode-btn" style="margin: 0; width: 100%; padding: 12px; font-size: 1em; border-radius: 8px; border: none; background: #F5402C; color: #fff; cursor: pointer;">Hard</button>
+          </div>
+          <button id="close-settings-btn" class="pause-menu-btn" style="margin-top: 18px;">Cancel</button>
+        </div>
+      `;
+      document.body.appendChild(popup);
+    } else {
+      popup.style.display = 'flex';
+    }
+    // Button logic
+    popup.querySelector('#easy-mode-btn').onclick = () => selectMode('easy');
+    popup.querySelector('#normal-mode-btn').onclick = () => selectMode('normal');
+    popup.querySelector('#hard-mode-btn').onclick = () => selectMode('hard');
+    popup.querySelector('#close-settings-btn').onclick = () => {
+      popup.style.display = 'none';
+    };
+  }
+
+  function selectMode(mode) {
+    window.gameMode = mode;
+    // Close popup
+    const popup = document.getElementById('settings-popup');
+    if (popup) popup.style.display = 'none';
+    // End any running game and restart with new mode
+    if (window.gameRunning) {
+      restartGame();
+    } else {
+      startGame();
+    }
+    // Optional: show feedback
+    setTimeout(() => {
+      alert('Game mode set to ' + mode.charAt(0).toUpperCase() + mode.slice(1));
+    }, 200);
+  }
+
+  if (settingsBtn) {
+    settingsBtn.addEventListener('click', showSettingsPopup);
+  }
   if (pauseBtn) {
     pauseBtn.addEventListener('click', () => {
       if (!isPaused) {
@@ -81,11 +148,9 @@ document.addEventListener('DOMContentLoaded', () => {
   }
   if (restartBtn) {
     restartBtn.addEventListener('click', () => {
-      // Always close pause overlay and resume game state
       document.getElementById('pause-overlay').style.display = 'none';
       document.getElementById('game-container').classList.remove('paused');
       isPaused = false;
-      // Now restart the game
       restartGame();
     });
   }
@@ -94,7 +159,6 @@ document.addEventListener('DOMContentLoaded', () => {
       restartGame();
     });
   }
-  // Ensure start button starts the game and hides overlay
   if (gameOverlay && startBtn) {
     startBtn.onclick = function() {
       gameOverlay.style.display = 'none';
@@ -145,10 +209,6 @@ function checkDropCollision(drop) {
 let gameRunning = false; // Keeps track of whether game is active or not
 let dropMaker; // Will store our timer that creates drops regularly
 
-// Wait for button click to start the game
-// (Handled above in DOMContentLoaded)
-document.getElementById("restart-btn").addEventListener("click", restartGame);
-
 // Character drag logic
 let character = document.getElementById("character");
 let gameContainer = document.getElementById("game-container");
@@ -158,14 +218,12 @@ let dragOffsetY = 0;
 
 function setCharacterPosition(x, y) {
   // Clamp character within game container
-  const containerRect = gameContainer.getBoundingClientRect();
-  const charRect = character.getBoundingClientRect();
   const minX = 0;
-  const minY = 0;
   const maxX = gameContainer.offsetWidth - character.offsetWidth;
-  const maxY = gameContainer.offsetHeight - character.offsetHeight;
+  // Always keep character at the default vertical position
+  const defaultY = gameContainer.offsetHeight - character.offsetHeight - 10;
   character.style.left = Math.max(minX, Math.min(x, maxX)) + "px";
-  character.style.top = Math.max(minY, Math.min(y, maxY)) + "px";
+  character.style.top = defaultY + "px";
 }
 
 function onPointerDown(e) {
@@ -190,17 +248,16 @@ function onPointerDown(e) {
 
 function onPointerMove(e) {
   if (!isDragging) return;
-  let pointerX, pointerY;
+  let pointerX;
   if (e.touches) {
     pointerX = e.touches[0].clientX;
-    pointerY = e.touches[0].clientY;
     e.preventDefault();
   } else {
     pointerX = e.clientX;
-    pointerY = e.clientY;
   }
   const containerRect = gameContainer.getBoundingClientRect();
-  setCharacterPosition(pointerX - containerRect.left - dragOffsetX, pointerY - containerRect.top - dragOffsetY);
+  // Only update x position, y is fixed
+  setCharacterPosition(pointerX - containerRect.left - dragOffsetX, 0);
   // After moving character, check for collisions with all drops
   document.querySelectorAll('.water-drop').forEach(drop => {
     checkDropCollision(drop);
@@ -227,13 +284,19 @@ window.addEventListener("DOMContentLoaded", () => {
 
 let timer = 45;
 let timerInterval;
+function getModeTimer() {
+  if (window.gameMode === 'easy') return 60;
+  if (window.gameMode === 'normal') return 45;
+  if (window.gameMode === 'hard') return 35;
+  return 45;
+}
 
 function updateTimerDisplay() {
   document.getElementById('time').textContent = timer;
 }
 
 function startTimer() {
-  timer = 45;
+  timer = getModeTimer();
   updateTimerDisplay();
   timerInterval = setInterval(() => {
     timer--;
@@ -353,22 +416,24 @@ function endGame() {
 
   // Render message and restart button for Try Again
   if (popupContent) {
+    // Always show Mission Completed text and Start Another Mission button
     popupContent.innerHTML = '';
     const msg = document.createElement('div');
+    msg.style.fontSize = '1.3em';
+    msg.style.fontWeight = 'bold';
+    msg.style.marginBottom = '12px';
     msg.textContent = popupConfig.message;
     popupContent.appendChild(msg);
-    if (!popupConfig.showConfetti) {
-      // Add Restart Mission button under Try Again text
-      const restartBtn = document.createElement('button');
-      restartBtn.id = 'restart-mission-btn';
-      restartBtn.className = 'mission-complete-btn';
-      restartBtn.style.marginTop = '18px';
-      restartBtn.textContent = 'Restart Mission';
-      restartBtn.onclick = restartGame;
-      popupContent.appendChild(restartBtn);
-      if (startAnotherBtn) startAnotherBtn.style.display = 'none';
-    } else {
-      if (startAnotherBtn) startAnotherBtn.style.display = '';
+    // Show Start Another Mission button for Mission Complete
+    if (startAnotherBtn) {
+      startAnotherBtn.style.display = popupConfig.showConfetti ? '' : 'none';
+      popupContent.appendChild(startAnotherBtn);
+    }
+    // Show Restart Mission button for Try Again
+    const restartBtn = document.getElementById('restart-mission-btn');
+    if (restartBtn) {
+      restartBtn.style.display = popupConfig.showConfetti ? 'none' : '';
+      if (!popupConfig.showConfetti) popupContent.appendChild(restartBtn);
     }
   }
   // Show confetti only for 20+
@@ -380,14 +445,14 @@ function endGame() {
 }
 
 // Add event listener for Restart Mission button
-window.addEventListener('DOMContentLoaded', () => {
-  const restartMissionBtn = document.getElementById('restart-mission-btn');
-  if (restartMissionBtn) {
-    restartMissionBtn.addEventListener('click', () => {
-      restartGame();
-    });
-  }
-});
+// Moved this logic into the main DOMContentLoaded listener above for consistency and to avoid duplicate listeners.
+// In the main DOMContentLoaded block (near line 41), add:
+const restartMissionBtn = document.getElementById('restart-mission-btn');
+if (restartMissionBtn) {
+  restartMissionBtn.addEventListener('click', () => {
+    restartGame();
+  });
+}
 
 function startGame() {
   if (gameRunning) return;
@@ -419,6 +484,7 @@ function restartGame() {
 
   // Hide mission complete popup and remove blur/block
   const popup = document.getElementById('mission-complete-popup');
+  
   if (popup) popup.style.display = 'none';
   if (gameContainer) gameContainer.classList.remove('mission-complete');
 
@@ -484,7 +550,15 @@ function createDrop() {
   }
 
   drop.style.animationName = "dropFallWithin";
-  drop.style.animationDuration = "6s";
+  if (window.gameMode === 'easy') {
+    drop.style.animationDuration = "6s";
+  } else if (window.gameMode === 'normal') {
+    drop.style.animationDuration = "5s";
+  } else if (window.gameMode === 'hard') {
+    drop.style.animationDuration = "4s";
+  } else {
+    drop.style.animationDuration = "5s";
+  }
 
   gameContainer.appendChild(drop);
 
@@ -520,3 +594,111 @@ function playChime() {
   }
 }
   
+
+function checkAchievements() {
+    const elapsed = Math.floor((Date.now() - startTime) / 1000);
+
+    if (score >= 20) unlockAchievement("canFull");
+    if (score >= 35 && elapsed <= 45) unlockAchievement("speedCollector");
+    if (score >= 35 && obstaclesHit === 0) unlockAchievement("perfectRun");
+  }
+
+  function unlockAchievement(id) {
+    const el = document.getElementById(id);
+    if (!el.classList.contains("unlocked")) {
+      el.classList.add("unlocked");
+      // Show achievement popup
+      showAchievementPopup(id);
+      console.log(`Achievement unlocked: ${el.textContent}`);
+    }
+}
+
+// Achievement popup logic
+function showAchievementPopup(id) {
+  // Achievement info
+  const achievementInfo = {
+    canFull: {
+      title: "Can Full",
+      summary: "Collect 20 clean water drops in a single run.",
+      img: "img/CLEAN water drop.png"
+    },
+    speedCollector: {
+      title: "Speed Collector",
+      summary: "Collect 35 drops in under 45 seconds.",
+      img: "img/water-can.png"
+    },
+    perfectRun: {
+      title: "Perfect Run",
+      summary: "Complete a run without hitting any obstacles.",
+      img: "img/Charity Water GIRL RUNNING.png"
+    }
+  };
+  const info = achievementInfo[id];
+  if (!info) return;
+  let popup = document.getElementById('achievement-popup');
+  if (!popup) {
+    popup = document.createElement('div');
+    popup.id = 'achievement-popup';
+    popup.style.position = 'fixed';
+    popup.style.top = '0';
+    popup.style.left = '0';
+    popup.style.width = '100vw';
+    popup.style.height = '100vh';
+    popup.style.background = 'rgba(0,0,0,0.5)';
+    popup.style.display = 'flex';
+    popup.style.alignItems = 'center';
+    popup.style.justifyContent = 'center';
+    popup.style.zIndex = '1001';
+    popup.innerHTML = `
+      <div style="background: #fff; border-radius: 16px; padding: 32px 24px; box-shadow: 0 4px 24px rgba(0,0,0,0.18); min-width: 280px; text-align: center;">
+        <img src="${info.img}" alt="${info.title}" style="width:64px; height:64px; margin-bottom:12px;" />
+        <h2 style="margin-bottom: 8px; font-size: 1.2em; color:#2E9DF7;">Achievement Unlocked!</h2>
+        <div style="font-weight:bold; margin-bottom:6px;">${info.title}</div>
+        <div style="margin-bottom:12px;">${info.summary}</div>
+        <button id="close-achievement-popup" style="margin-top: 8px; padding: 8px 24px; border-radius: 8px; border: none; background: #2E9DF7; color: #fff; cursor: pointer;">Close</button>
+      </div>
+    `;
+    document.body.appendChild(popup);
+  } else {
+    popup.style.display = 'flex';
+    // Update content if needed
+    popup.querySelector('img').src = info.img;
+    popup.querySelector('img').alt = info.title;
+    popup.querySelector('h2').textContent = 'Achievement Unlocked!';
+    popup.querySelector('div').textContent = info.title;
+    popup.querySelectorAll('div')[1].textContent = info.summary;
+  }
+  // Close button logic
+  popup.querySelector('#close-achievement-popup').onclick = () => {
+    popup.style.display = 'none';
+  };
+}
+  document.getElementById('start-another-btn').onclick = function() {
+              document.getElementById('mission-complete-popup').style.display = 'none';
+              document.getElementById('try-again-popup').style.display = 'flex';
+              };
+
+              const musicBtn = document.getElementById('music-btn');
+    const musicMuteSvg = document.getElementById('music-mute-svg');
+    const gameMusic = document.getElementById('game-music');
+    const chimeSound = document.getElementById('chime-sound');
+    let musicMuted = false;
+
+    // Start music when game starts
+    document.getElementById('start-btn').addEventListener('click', function() {
+      gameMusic.volume = 0.5;
+      gameMusic.play();
+    });
+
+    musicBtn.addEventListener('click', function() {
+      musicMuted = !musicMuted;
+      gameMusic.muted = musicMuted;
+      musicMuteSvg.style.display = musicMuted ? 'inline' : 'none';
+    });
+
+    // Call this function when a clean water drop is collected
+    function playChime() {
+      chimeSound.currentTime = 0;
+      chimeSound.play();
+    }
+    // Example usage: playChime();
