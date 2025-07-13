@@ -264,7 +264,7 @@ body {
     justify-content: center;
     pointer-events: all;
 }
-.pause-menu {
+.pause-menu, #pause-menu {
     background: #fff;
     border-radius: 18px;
     box-shadow: 0 8px 32px rgba(0,0,0,0.25);
@@ -589,4 +589,15 @@ h5 {
 .menu-btn:hover {
     background-color: #FFC907;
     color: #131313;
+}
+
+#milestone-container {
+     width: 800px;
+    height: 600px;
+    background-color: #e6f7ff;
+    border: 4px solid #333;
+    border-radius: 8px;
+    position: relative;
+    overflow: hidden;
+    margin-bottom: 50px;
 }

@@ -94,11 +94,12 @@ document.addEventListener('DOMContentLoaded', () => {
       restartGame();
     });
   }
+  // Ensure start button starts the game and hides overlay
   if (gameOverlay && startBtn) {
-    startBtn.addEventListener('click', () => {
+    startBtn.onclick = function() {
       gameOverlay.style.display = 'none';
-      // Optionally, start the game logic here
-    });
+      startGame();
+    };
   }
   // Avatar button and menu already handled elsewhere
 });
@@ -145,7 +146,7 @@ let gameRunning = false; // Keeps track of whether game is active or not
 let dropMaker; // Will store our timer that creates drops regularly
 
 // Wait for button click to start the game
-document.getElementById("start-btn").addEventListener("click", startGame);
+// (Handled above in DOMContentLoaded)
 document.getElementById("restart-btn").addEventListener("click", restartGame);
 
 // Character drag logic
@@ -507,6 +508,15 @@ function playChime() {
   const chime = document.getElementById('chime-sound');
   if (chime) {
     chime.currentTime = 0;
+    chime.onplay = null;
+    chime.ontimeupdate = function() {
+      if (chime.currentTime >= 1) {
+        chime.pause();
+        chime.currentTime = 0;
+        chime.ontimeupdate = null;
+      }
+    };
     chime.play().catch(err => console.error('Error playing chime:', err));
   }
 }
+  
