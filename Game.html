@@ -18,7 +18,7 @@
        <h2 class="game-subtitle"> X</h2>
        <img src="img/cw_logo-horizontal.png" alt="Water Run Logo" class="game-logo">
   
-        <div class="game-container" id="game-container" style="background: url('img/Screenshot_11-7-2025_21207_www.charitywater.org.jpeg') center center / cover no-repeat;">
+        <div class="game-container" id="game-container" style="background: url('img/Background.png') center center / cover no-repeat;">
           <div id="game-overlay" class="game-overlay" style="display: flex;">
             <div class="game-overlay-content">
               <h2>Welcome to Water Run!</h2>
@@ -69,9 +69,14 @@
               <div class="mission-complete-content" style="background:#fff; border-radius:16px; padding:32px 24px; box-shadow:0 4px 24px rgba(0,0,0,0.18); min-width:280px; text-align:center;">
                 Mission Completed!
               </div>
+
+            </div>
+            <div id="try-again-popup" style="display:none; position:fixed; top:0; left:0; width:100vw; height:100vh; background:rgba(0,0,0,0.5); z-index:1000; align-items:center; justify-content:center;">
+              <div class="mission-complete-content" style="background:#fff; border-radius:16px; padding:32px 24px; box-shadow:0 4px 24px rgba(0,0,0,0.18); min-width:280px; text-align:center;">
+                Try Again
+              </div>
               <button id="start-another-btn" class="mission-complete-btn">Start Another Mission</button>
             </div>
-            
             
             
         </div>
