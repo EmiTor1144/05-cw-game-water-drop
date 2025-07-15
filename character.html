@@ -5,21 +5,30 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Your Character - Water Run Game</title>
   <link rel="stylesheet" href="styles.css">
+  <style>
+    body, h1, h2, h3, h4, h5, h6, p, a, button, div, span, menu {
+      font-family: 'Proxima Nova', 'Avenir', sans-serif;
+    }
+  </style>
 </head>
 <body>
   <div class="menu-wrapper">
     <h1>Water Run</h1>
     <h2 class="game-subtitle">Your Character</h2>
-    <img src="img/cw_logo-horizontal.png" alt="Water Run Logo" class="game-logo">
+    <img src="img/cw_logo-horizontal.png"  class="game-logo">
+
     <div class="game-container" id="game-container">
-      <h3>Character Details</h3>
+      <h3> Customize your runner!</h3>
       <img src="img/Charity Water GIRL.png" alt="Character" style="width:180px; margin-bottom:16px;">
-      <p style="font-size:1.1em; color:#2E9DF7;">Meet your runner! Help her collect clean water and avoid dirty drops to win the game.</p>
+      <p style="font-size:1.1em; color:#2E9DF7;"> Choose among 3 sets of outfits, skin tones, and hair style!</p>
       <div class="menu-buttons">
-        <button onclick="window.location.href='index.html'">Main Menu</button>
-        <button onclick="window.location.href='Game.html'">Play Game</button>
+
+        <button class="menu-btn" onclick="window.location.href='index.html'">Main Menu</button>
+        <button class="menu-btn" onclick="window.location.href='Game.html'">Play Game</button>
+        <button class="menu-btn" onclick="window.location.href='milestones.html'">Milestones</button>
       </div>
     </div>
   </div>
+  <script src="script.js"></script>
 </body>
 </html>
